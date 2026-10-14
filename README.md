@@ -8,20 +8,19 @@ Công cụ **độc lập** giúp xem trước và dọn các tệp Zalo lưu tr
 
 **Phiên bản hiện tại: ZCleaner Version 1.0.0 cho macOS.** Tải tại [Release v1.0.0](https://github.com/ronhuynh-learndev/ZCleaner-public/releases/tag/v1.0.0): có bản Apple Silicon và Intel. Chọn đúng bản cho chip của máy và đối chiếu SHA-256 trong file `.sha256` đi kèm. Bản Intel đã được thử dưới Rosetta; chưa thử trên Mac Intel vật lý. Ứng dụng chưa được Apple notarize.
 
-## Kiểm chứng, không cần tin lời
+## Tìm hiểu cách ZCleaner bảo vệ dữ liệu
 
-Repo này công khai một phần mã nguồn để bạn đối chiếu các lời hứa về quyền riêng tư:
+Nếu muốn xem cách ứng dụng xử lý dữ liệu, bạn có thể bắt đầu từ:
 
 - [PRIVACY.md](PRIVACY.md): chính sách quyền riêng tư đầy đủ.
 - [AUDIT.md](AUDIT.md): mỗi lời hứa được thực thi ở **đoạn code nào**, để bạn tự đọc và kiểm tra.
 - [`audit/`](audit/): mã nguồn trích nguyên văn (thống kê ẩn danh, dò thư mục Zalo, các hàm quyết định cái gì được phép xóa).
 
-Giao diện và các phần xử lý khác chưa công khai.
-Vì mã nguồn và bản build đầy đủ chưa công khai, các đoạn trích này không đủ để kiểm chứng độc lập toàn bộ ứng dụng đã phát hành.
+Các đoạn mã được công khai để đối chiếu những cơ chế cụ thể; [AUDIT.md](AUDIT.md) ghi rõ phạm vi của chúng.
 
 ## English
 
-ZCleaner Version 1.0.0 is an independent macOS tool to preview and clean Zalo files stored on your computer. It never uploads file names, paths or contents. This repository publishes only the parts that let you verify that claim (`audit/`, `AUDIT.md`, `PRIVACY.md`); the UI and remaining logic are not published. Not affiliated with Zalo.
+ZCleaner Version 1.0.0 is an independent macOS tool to preview and clean Zalo files stored on your computer. It never uploads file names, paths or contents. [Download the current release](https://github.com/ronhuynh-learndev/ZCleaner-public/releases/tag/v1.0.0) or explore the [privacy policy](PRIVACY.md), [audit notes](AUDIT.md) and selected [code excerpts](audit/). Not affiliated with Zalo.
 
 ## Giấy phép
 
