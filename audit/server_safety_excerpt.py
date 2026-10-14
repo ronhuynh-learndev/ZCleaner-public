@@ -99,19 +99,24 @@ def move_to_trash(path):
 def trash_selected(ids):
     if send2trash is None and sys.platform != "darwin":
         raise RuntimeError("Chưa cài thành phần chuyển vào Thùng rác")
-    requested = validated_selection(ids)
+    if not ids or len(ids) > len(ITEMS) or len(ids) != len(set(ids)):
+        raise ValueError("Danh sách chọn không hợp lệ")
+    requested = [ITEMS[i] for i in ids]
+    blocked = protected_inodes()
     moved = []
     moved_ids = []
-    failure = None
+    failures = []
     batch = secrets.token_hex(4)  # one "Chuyển vào Thùng rác" click
     for item in requested:
         source = Path(item["path"])
         try:
+            if item["path"] not in SELECTED or item["inode"] in blocked or item.get("removed"):
+                raise ValueError("Lựa chọn đã thay đổi. Hãy quét lại")
             current_source(item)
             trashed = move_to_trash(source)
         except Exception as exc:
-            failure = str(exc)
-            break
+            failures.append(str(exc))
+            continue
         item["removed"] = True
         SELECTED.discard(item["path"])
         moved_ids.append(item["id"])
@@ -129,7 +134,7 @@ def trash_selected(ids):
             save_selection()
         except OSError:
             warning = (warning or "") + " Không lưu được danh sách chọn."
-    return {"moved": len(moved), "movedIds": moved_ids, "failed": len(requested) - len(moved), "bytes": sum(x["size"] for x in moved), "error": failure, "warning": warning}
+    return {"moved": len(moved), "movedIds": moved_ids, "failed": len(failures), "bytes": sum(x["size"] for x in moved), "error": failures[0] if failures else None, "warning": warning}
 
 
 def delete_selected(ids):
