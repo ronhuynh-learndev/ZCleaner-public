@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.dmg
+*.zip
+.build/
+.venv/
+.env
+*.p12
+*.pem
+*.key
